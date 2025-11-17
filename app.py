@@ -75,7 +75,7 @@ def extract_text_from_url(url: str) -> str:
 
 # OpenAI Model setup
 openai_client = None
-llm_model_name = "gpt-4o-mini" # Default to a commonly available OpenAI model
+llm_model_name = "gpt-4.1-mini" # Default to a commonly available OpenAI model
 
 # Configure the OpenAI client
 OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
