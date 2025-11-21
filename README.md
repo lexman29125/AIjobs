@@ -110,7 +110,7 @@ The solution has demonstrated the following key concepts:
 
 -	Deployable to:
 
--	Google Cloud Run
+-	Google CloudRun (Instructions: https://github.com/lexman29125/AIjobs/blob/main/GCP_CloudRun_Instructions.md)
 
 -	Hugging Face Spaces
 
