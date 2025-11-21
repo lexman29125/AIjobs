@@ -66,7 +66,7 @@ I built a full Agentic AI Job Assistant, consisting of:
 
 #### Coordinator Agent (Brain)
 ```
-•	OpenAI LLM (4o-mini)
+•	Gemini LLM (gemini-2.5-flash)
 
 •	Multi-step reasoning
 
@@ -102,7 +102,7 @@ The solution has demonstrated the following key concepts:
 
 -	custom tools
 
--	OpenAPI tools
+-	Google GenAI SDK tools
 
 3. Agent deployment:
 
@@ -137,9 +137,9 @@ The solution has demonstrated the following key concepts:
 -	a description
 ```
 
-##### Integrated OpenAI’s 4.1-mini model for reasoning
+##### Integrated Gemini model for reasoning
 ```
-•	Used openai Python SDK with OpenAI api_key
+•	Used Gemini Python SDK with Gemini api_key
 
 •	Built a JSON reasoning prompt to extract:
 
@@ -207,7 +207,7 @@ This gives the feeling of a live AI assistant.
 ```
 •	.env loading via dotenv
 
-•	Validated OpenAI API key
+•	Validated Gemini API key
 
 •	Stopped the app if key missing
 
