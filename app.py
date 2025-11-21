@@ -7,15 +7,31 @@ import nest_asyncio
 import random
 import re
 import json
-import openai
-from openai import OpenAI
+from google import genai
 import requests
 from bs4 import BeautifulSoup
 from dotenv import load_dotenv
 # Load .env file
 load_dotenv()
 
-# Ensure nest_asyncio is applied if not already done in the session
+# Check if Streamlit is running in a script context
+# This is a common way to check if the script is being executed by Streamlit or directly by Python
+IS_STREAMLIT_RUNNING = False
+if 'st' in globals() and hasattr(st, '_is_running_with_streamlit'): # Using the more common internal check
+    IS_STREAMLIT_RUNNING = st._is_running_with_streamlit
+    if IS_STREAMLIT_RUNNING:
+        print("Streamlit script run context detected.")
+    else:
+        print("Streamlit module imported, but not running in a script run context.")
+elif 'st' in globals() and hasattr(st, 'runtime') and hasattr(st.runtime, 'scriptrunner') and hasattr(st.runtime.scriptrunner, 'is_in_script_run_context'):
+    IS_STREAMLIT_RUNNING = st.runtime.scriptrunner.is_in_script_run_context()
+    if IS_STREAMLIT_RUNNING:
+        print("Streamlit script run context detected via runtime check.")
+    else:
+        print("Streamlit module imported, but not running in a script run context via runtime check.")
+else:
+    print("Streamlit module not fully initialized or relevant runtime attributes missing for context check.")
+
 nest_asyncio.apply()
 
 # Helper function to parse salary from string (might not be used in current workflow but kept for consistency)
@@ -47,7 +63,7 @@ def extract_text_from_url(url: str) -> str:
     """Extracts text content from a given URL, typically for a job description."""
     try:
         headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+            'User-Agent': 'Mozilla/50 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
         }
         # Modified: Increased timeout from 10 to 30 seconds
         response = requests.get(url, headers=headers, timeout=30)
@@ -67,71 +83,58 @@ def extract_text_from_url(url: str) -> str:
         text = '\n'.join(chunk for chunk in chunks if chunk)
         return text
     except requests.exceptions.RequestException as e:
-        st.error(f"Error fetching URL {url}: {e}") # Use st.error for Streamlit
+        if IS_STREAMLIT_RUNNING:
+            st.error(f"Error fetching URL {url}: {e}")
+        else:
+            print(f"Error fetching URL {url}: {e}")
         return ""
     except Exception as e:
-        st.error(f"Error processing URL {url}: {e}") # Use st.error for Streamlit
+        if IS_STREAMLIT_RUNNING:
+            st.error(f"Error processing URL {url}: {e}")
+        else:
+            print(f"Error processing URL {url}: {e}")
         return ""
 
-# OpenAI Model setup
-openai_client = None
-llm_model_name = "gpt-4.1-mini" # Default to a commonly available OpenAI model
+llm_model_name = "gemini-2.5-flash" # Using a suitable Gemini model
 
-# Configure the OpenAI client
-OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
-
-# In Streamlit, handle API key input/error more gracefully
-if not OPENAI_API_KEY or OPENAI_API_KEY == "YOUR_OPENAI_API_KEY_HERE":
-    st.sidebar.error("OPENAI_API_KEY environment variable not set or is a placeholder.")
-    st.sidebar.warning("Please provide your OpenAI API Key to continue. (Set as environment variable or in st.secrets)")
-    st.stop() # Stop the app if API key is missing
-
-try:
-    openai_client = OpenAI(api_key=OPENAI_API_KEY)
-    # st.sidebar.success(f"OpenAI client initialized with model: {llm_model_name}") # Suppress this print in the final UI
-except Exception as e:
-    st.sidebar.error(f"Error initializing OpenAI client: {e}. Please check your API key and network connection.")
-    st.stop()
+# Configure the Gemini client for google-genai 1.52.0+
+GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
+gemini_model = genai.Client(api_key=GOOGLE_API_KEY)
 
 def analyze_skills_and_gaps(resume_text: str, job_description_text: str) -> str:
     """Analyzes a candidate's resume against a job description using the LLM to identify skills and gaps."""
-    system_prompt = """You are an expert HR analyst. Your task is to compare a candidate's resume with a job description. \
-    Provide your output as a JSON object ONLY. Do not include any other text or explanation outside the JSON."""
+    # Modified: Combine system prompt into user prompt for Gemini's single-turn API
+    full_prompt = f"""
+    You are an expert HR analyst. Your task is to compare a candidate's resume with a job description.
+    Provide your output as a JSON object ONLY. Do not include any other text or explanation outside the JSON.
 
-    user_prompt = f"""Here is the candidate's Resume:
----
-{resume_text}
----
+    Here is the candidate's Resume:
+    ---
+    {resume_text}
+    ---
 
-Here is the Job Description:
----
-{job_description_text}
----
+    Here is the Job Description:
+    ---
+    {job_description_text}
+    ---
 
-JSON Schema:
-{{
-    "candidate_skills": ["string"], # List of key technical and soft skills explicitly mentioned in the resume.
-    "required_job_skills": ["string"], # List of essential technical and soft skills mentioned in the job description.
-    "matched_skills": ["string"], # Skills present in both the resume and the job description.
-    "missing_skills": ["string"], # Skills required by the job description but NOT found in the resume.
-    "additional_skills": ["string"], # Skills present in the resume but not explicitly required by the job description.
-    "overall_fit_summary": "string" # A brief summary of how well the candidate's skills align with the job requirements.
-}}
-"""
+    JSON Schema:
+    {{
+        "candidate_skills": ["string"], # List of key technical and soft skills explicitly mentioned in the resume.
+        "required_job_skills": ["string"], # List of essential technical and soft skills mentioned in the job description.
+        "matched_skills": ["string"], # Skills present in both the resume and the job description.
+        "missing_skills": ["string"], # Skills required by the job description but NOT found in the resume.
+        "additional_skills": ["string"], # Skills present in the resume but not explicitly required by the job description.
+        "overall_fit_summary": "string" # A brief summary of how well the candidate's skills align with the job requirements.
+    }}
+    """
 
     try:
-        if openai_client is None:
-            return "Error: OpenAI client not initialized."
-
-        response = openai_client.chat.completions.create(
+        response = gemini_model.models.generate_content(
             model=llm_model_name,
-            response_format={ "type": "json_object" }, # Specify JSON output
-            messages=[
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": user_prompt}
-            ]
+            contents=full_prompt
         )
-        return response.choices[0].message.content
+        return response.text
     except Exception as e:
         return f"Error during LLM analysis: {e}"
 
@@ -139,8 +142,10 @@ def analyze_resume_job_description_full(resume_text: str, job_description_text: 
     """Performs a full resume and job description analysis using the LLM.
     This function replaces the placeholder and calls analyze_skills_and_gaps.
     """
-    # Use st.info for Streamlit progress updates
-    st.info(f"Initiating LLM-based analysis for resume (length: {len(resume_text)}) and job description (length: {len(job_description_text)}).")
+    if IS_STREAMLIT_RUNNING:
+        st.info(f"Initiating LLM-based analysis for resume (length: {len(resume_text)}) and job description (length: {len(job_description_text)}).")
+    else:
+        print(f"Initiating LLM-based analysis for resume (length: {len(resume_text)}) and job description (length: {len(job_description_text)}).")
     analysis_report = analyze_skills_and_gaps(resume_text, job_description_text)
 
     if "Error during LLM analysis" in analysis_report:
