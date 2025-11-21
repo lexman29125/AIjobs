@@ -3,7 +3,6 @@ PyPDF2==3.0.1
 beautifulsoup4==4.12.3
 requests==2.32.3
 nest-asyncio==1.6.0
-openai==1.109.1
 dotenv
 google-generativeai==1.52.0
 pydeck==0.9.1
