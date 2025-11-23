@@ -1,0 +1,65 @@
+﻿
+      <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+      <head>
+        <meta charset="utf-8">
+        <title>Proposed CV</title>
+        <style>
+          body { font-family: Arial, sans-serif; font-size: 11pt; }
+        </style>
+      </head>
+      <body>
+        <h1 style="font-size: 24pt; font-family: Arial, sans-serif; color: #333; border-bottom: 2px solid #333; padding-bottom: 10px; margin-bottom: 20px;">[Name]</h1>
+<p style="font-family: Arial, sans-serif; font-size: 11pt; line-height: 1.5; margin-bottom: 10px;">[Phone Number] | [Email Address] | [LinkedIn Profile URL] | [Portfolio/GitHub URL (Optional)]</p>
+<br/>
+<h2 style="font-size: 16pt; font-family: Arial, sans-serif; color: #2E5C55; margin-top: 20px; margin-bottom: 10px; text-transform: uppercase;">PROFESSIONAL SUMMARY</h2>
+<p style="font-family: Arial, sans-serif; font-size: 11pt; line-height: 1.5; margin-bottom: 10px;">Highly accomplished and performance-driven Software Engineer with 7+ years of experience specializing in the design, development, and optimization of high-performance, low-latency trading systems within dynamic financial market environments. Proven expertise in modern C++ (C++11/14/17) development on Unix/Linux platforms, coupled with a deep understanding of concurrent programming, network protocols, and real-time data processing. Successfully optimized critical system architecture for companies serving 2000+ users, significantly enhancing throughput and reducing latency. Adept at full software development life cycle, from architectural design to deployment and production support, with a strong focus on delivering robust and efficient solutions for High-Frequency Trading (HFT) and complex algorithmic strategies.</p>
+<br/>
+<h2 style="font-size: 16pt; font-family: Arial, sans-serif; color: #2E5C55; margin-top: 20px; margin-bottom: 10px; text-transform: uppercase;">SKILLS</h2>
+<p style="font-family: Arial, sans-serif; font-size: 11pt; line-height: 1.5; margin-bottom: 10px;">*   <strong>Programming Languages:</strong> C++ (C++11/14/17), Python, Bash Scripting</p>
+<p style="font-family: Arial, sans-serif; font-size: 11pt; line-height: 1.5; margin-bottom: 10px;">*   <strong>Operating Systems:</strong> Unix, Linux (Ubuntu, CentOS), RTOS principles</p>
+<p style="font-family: Arial, sans-serif; font-size: 11pt; line-height: 1.5; margin-bottom: 10px;">*   <strong>Financial Technologies:</strong> Low-Latency Trading Systems, High-Frequency Trading (HFT), Market Data Feeds (FIX, ITCH, SBE), Order Management Systems (OMS), Execution Management Systems (EMS), Algorithmic Trading</p>
+<p style="font-family: Arial, sans-serif; font-size: 11pt; line-height: 1.5; margin-bottom: 10px;">*   <strong>Networking & Concurrency:</strong> TCP/IP, UDP Multicast, Socket Programming, Multithreading, Concurrency Primitives, Distributed Systems, IPC</p>
+<p style="font-family: Arial, sans-serif; font-size: 11pt; line-height: 1.5; margin-bottom: 10px;">*   <strong>Tools & Methodologies:</strong> Git, CMake, GDB, Valgrind, Boost, STL, Agile/Scrum, CI/CD</p>
+<p style="font-family: Arial, sans-serif; font-size: 11pt; line-height: 1.5; margin-bottom: 10px;">*   <strong>Databases (Desired):</strong> kdb+, SQL</p>
+<p style="font-family: Arial, sans-serif; font-size: 11pt; line-height: 1.5; margin-bottom: 10px;">*   <strong>Concepts:</strong> Data Structures, Algorithms, System Design, Performance Optimization, Real-time Systems, Micro-optimization</p>
+<br/>
+<h2 style="font-size: 16pt; font-family: Arial, sans-serif; color: #2E5C55; margin-top: 20px; margin-bottom: 10px; text-transform: uppercase;">EXPERIENCE</h2>
+<br/>
+<p style="font-family: Arial, sans-serif; font-size: 11pt; line-height: 1.5; margin-bottom: 10px;"><strong>Senior Software Engineer, Trading Systems</strong> | [Company Name] | [City, State]</p>
+<p style="font-family: Arial, sans-serif; font-size: 11pt; line-height: 1.5; margin-bottom: 10px;">[Start Date] – [End Date]</p>
+<br/>
+<p style="font-family: Arial, sans-serif; font-size: 11pt; line-height: 1.5; margin-bottom: 10px;">*   Led the design, development, and optimization of ultra low-latency trading system components in modern C++ for high-frequency trading strategies, supporting a user base of over 2000 institutional clients.</p>
+<p style="font-family: Arial, sans-serif; font-size: 11pt; line-height: 1.5; margin-bottom: 10px;">*   Architected and implemented critical market data ingestion and order execution pathways, reducing average end-to-end latency by 30% through kernel-level tuning, network stack optimization, and efficient data serialization.</p>
+<p style="font-family: Arial, sans-serif; font-size: 11pt; line-height: 1.5; margin-bottom: 10px;">*   Developed and maintained robust, fault-tolerant real-time systems on Linux, leveraging concurrent programming techniques (e.g., lock-free data structures, shared memory IPC) to maximize throughput and minimize jitter.</p>
+<p style="font-family: Arial, sans-serif; font-size: 11pt; line-height: 1.5; margin-bottom: 10px;">*   Collaborated directly with quantitative researchers and traders to translate complex algorithmic strategies into performant, production-ready C++ code.</p>
+<p style="font-family: Arial, sans-serif; font-size: 11pt; line-height: 1.5; margin-bottom: 10px;">*   Implemented custom network protocols and optimized existing ones (TCP/IP, UDP multicast) for rapid data dissemination and reliable message delivery across distributed systems.</p>
+<p style="font-family: Arial, sans-serif; font-size: 11pt; line-height: 1.5; margin-bottom: 10px;">*   Performed in-depth performance analysis using profiling tools (e.g., Valgrind, perf) to identify bottlenecks and implement micro-optimizations at the instruction level.</p>
+<p style="font-family: Arial, sans-serif; font-size: 11pt; line-height: 1.5; margin-bottom: 10px;">*   Managed the full software development lifecycle, including requirements gathering, architectural design, coding, testing, deployment, and 24/7 production support.</p>
+<br/>
+<p style="font-family: Arial, sans-serif; font-size: 11pt; line-height: 1.5; margin-bottom: 10px;"><strong>Software Engineer</strong> | [Previous Company Name] | [City, State]</p>
+<p style="font-family: Arial, sans-serif; font-size: 11pt; line-height: 1.5; margin-bottom: 10px;">[Start Date] – [End Date]</p>
+<br/>
+<p style="font-family: Arial, sans-serif; font-size: 11pt; line-height: 1.5; margin-bottom: 10px;">*   Contributed to the development of real-time financial applications using C++ and Python on Unix-based systems.</p>
+<p style="font-family: Arial, sans-serif; font-size: 11pt; line-height: 1.5; margin-bottom: 10px;">*   Developed new features for an order management system, integrating with various exchange APIs and internal services.</p>
+<p style="font-family: Arial, sans-serif; font-size: 11pt; line-height: 1.5; margin-bottom: 10px;">*   Optimized existing codebases for improved performance and scalability, focusing on areas such as memory management and CPU utilization.</p>
+<p style="font-family: Arial, sans-serif; font-size: 11pt; line-height: 1.5; margin-bottom: 10px;">*   Participated in code reviews, ensuring adherence to coding standards, best practices, and system performance requirements.</p>
+<p style="font-family: Arial, sans-serif; font-size: 11pt; line-height: 1.5; margin-bottom: 10px;">*   Utilized Git for version control and collaborated effectively within an Agile development team.</p>
+<br/>
+<h2 style="font-size: 16pt; font-family: Arial, sans-serif; color: #2E5C55; margin-top: 20px; margin-bottom: 10px; text-transform: uppercase;">EDUCATION</h2>
+<p style="font-family: Arial, sans-serif; font-size: 11pt; line-height: 1.5; margin-bottom: 10px;"><strong>Master of Science in Computer Science</strong> | [University Name] | [City, State]</p>
+<p style="font-family: Arial, sans-serif; font-size: 11pt; line-height: 1.5; margin-bottom: 10px;">[Graduation Date]</p>
+<br/>
+<p style="font-family: Arial, sans-serif; font-size: 11pt; line-height: 1.5; margin-bottom: 10px;"><strong>Bachelor of Science in Computer Science</strong> | [University Name] | [City, State]</p>
+<p style="font-family: Arial, sans-serif; font-size: 11pt; line-height: 1.5; margin-bottom: 10px;">[Graduation Date]</p>
+<br/>
+<h2 style="font-size: 16pt; font-family: Arial, sans-serif; color: #2E5C55; margin-top: 20px; margin-bottom: 10px; text-transform: uppercase;">PROJECTS (Optional)</h2>
+<p style="font-family: Arial, sans-serif; font-size: 11pt; line-height: 1.5; margin-bottom: 10px;"><strong>Low-Latency Market Data Feed Parser</strong></p>
+<p style="font-family: Arial, sans-serif; font-size: 11pt; line-height: 1.5; margin-bottom: 10px;">*   Developed a C++ application on Linux to parse simulated exchange market data (ITCH protocol) with sub-microsecond latency.</p>
+<p style="font-family: Arial, sans-serif; font-size: 11pt; line-height: 1.5; margin-bottom: 10px;">*   Implemented custom low-overhead data structures and optimized network I/O for high-throughput processing.</p>
+<br/>
+<p style="font-family: Arial, sans-serif; font-size: 11pt; line-height: 1.5; margin-bottom: 10px;"><strong>Concurrent Order Book Implementation</strong></p>
+<p style="font-family: Arial, sans-serif; font-size: 11pt; line-height: 1.5; margin-bottom: 10px;">*   Designed and built a multi-threaded, lock-free C++ order book system capable of handling high volumes of simulated market orders and trades.</p>
+<p style="font-family: Arial, sans-serif; font-size: 11pt; line-height: 1.5; margin-bottom: 10px;">*   Benchmarked performance against various concurrency models to identify optimal solutions.</p>
+      </body>
+      </html>
+    

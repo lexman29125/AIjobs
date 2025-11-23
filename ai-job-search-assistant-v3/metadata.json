@@ -1,0 +1,5 @@
+{
+  "name": "AI Job Search Assistant V3",
+  "description": "Analyze your resume against job descriptions using Agentic AI to find skill gaps and optimization opportunities.",
+  "requestFramePermissions": []
+}
