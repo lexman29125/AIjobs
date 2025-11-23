@@ -62,8 +62,10 @@ Agent Tools
 ```
 
 ### Demo  
+
+•	Solution is deployed to Google CloudRun: 
 ```
-•	Solution is deployed to Google CloudRun: https://ai-job-search-assistant-v4-771689288896.us-west1.run.app/
+https://ai-job-search-assistant-v4-771689288896.us-west1.run.app/
 ```
 
 ```
