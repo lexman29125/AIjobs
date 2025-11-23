@@ -70,27 +70,27 @@ Agent Tools
 ```
 •	Landing Page allowing user interaction by entering desired job URL and attach CV
 
-![alt text](./images/Demo1.png)
+![Logo](https://github.com/lexman29125/AIjobs/raw/main/images/Demo1.png)
 
 •	Run Analysis with observabilty and tracing of agents reasoning
 
-![alt text](./images/Demo2.png)
+![Logo](https://github.com/lexman29125/AIjobs/raw/main/images/Demo2.png)
 
 •	Run Analysis to provide Executive Summary with profile match percentage against job requirements. Provide summary of candidate's strengths vs job requirements and critical gaps listing "deal-breakers"
 
-![alt text](./images/Demo3.png)
+![Logo](https://github.com/lexman29125/AIjobs/raw/main/images/Demo3.png)
 
 •	Strategic Discussion function utilises a chatbot UI, allowing user to interact and feedback about the analysis and gaps
 
-![alt text](./images/Demo4.png)
+![Logo](https://github.com/lexman29125/AIjobs/raw/main/images/Demo4.png)
 
 •	Draft Proposed CV uses the inputs from the chatbot user interaction to fine-tune the analysis, and produce a ATS standard CV that can be easily copied or downloaded for job application 
 
-![alt text](./images/Demo5.png)
+![Logo](https://github.com/lexman29125/AIjobs/raw/main/images/Demo5.png)
 
 •	Downloaded Final CV compliant with ATS standard in WORD format
 
-![alt text](./images/Demo6.png)
+![Logo](https://github.com/lexman29125/AIjobs/raw/main/images/Demo6.png)
 
 ### If I had more time, this is what I'd do
 ```
