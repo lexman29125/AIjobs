@@ -36,8 +36,6 @@ const App: React.FC = () => {
     chatSessionRef.current = null;
 
     try {
-      // Execute the Multi-Agent Workflow
-      // The orchestrator handles the "Parallel" and "Sequential" logic internally.
       const { result, memory } = await orchestrateAnalysis(
         resumeFile, 
         jobUrl, 
@@ -45,15 +43,13 @@ const App: React.FC = () => {
       );
       
       setResult(result);
-
-      // Initialize Chat Session with the populated Memory Bank
       chatSessionRef.current = createChatSession(memory);
 
     } catch (error) {
       console.error(error);
       handleLog({
         id: 'err', 
-        message: "An error occurred during analysis. Please try again.", 
+        message: "An error occurred during analysis.", 
         type: 'info', 
         timestamp: Date.now()
       });
@@ -78,9 +74,6 @@ const App: React.FC = () => {
 
     try {
       const response = await sendChatMessage(chatSessionRef.current, text);
-      
-      // Intelligent CV Detection (Agent A2A Logic Simulation)
-      // We detect if the "Career Coach Agent" output matches a CV structure
       const isCV = response.trim().startsWith('# ') || (response.includes('## Experience') && response.length > 300);
 
       if (viewMode === 'cv_preview' && isCV) {
@@ -101,7 +94,6 @@ const App: React.FC = () => {
   const handleDraftCV = async () => {
     if (!chatSessionRef.current) return;
 
-    // Explicit Prompt Engineering for the Agent
     const prompt = "Based on our discussion and the initial analysis, please draft the full proposed CV now in Markdown format. Remember: Output ONLY the Markdown content.";
     
     setChatMessages(prev => [...prev, { role: 'user', text: "Draft Proposed CV for the job" }]);
@@ -110,9 +102,8 @@ const App: React.FC = () => {
     try {
       const cvContent = await sendChatMessage(chatSessionRef.current, prompt);
       
-      setChatMessages(prev => [...prev, { role: 'model', text: "I have drafted the tailored CV. You can now review it on the split screen. Let me know if you need any changes!" }]);
+      setChatMessages(prev => [...prev, { role: 'model', text: "I have drafted the tailored CV. You can now review it on the split screen." }]);
       
-      // UX Transition
       setTimeout(() => {
         setGeneratedCV(cvContent);
         setViewMode('cv_preview');
@@ -127,7 +118,7 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="flex h-screen w-full bg-gray-50">
+    <div className="flex h-screen w-full bg-slate-50 font-sans overflow-hidden">
       <Sidebar 
         jobUrl={jobUrl}
         setJobUrl={setJobUrl}

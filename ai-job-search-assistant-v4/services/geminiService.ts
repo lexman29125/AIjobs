@@ -98,10 +98,27 @@ class JobArchitectAgent extends BaseAgent {
     try {
       // CONCEPT: Tool Use
       // We enable googleSearch. The model decides how to use it to get the JD content.
+      // IMPROVED PROMPT: Explicitly handle cases where the URL is behind a login by asking for a broader search.
       const response = await ai.models.generateContent({
         model: this.model,
         contents: {
-          parts: [{ text: `Find the full job description text for this URL: ${jobUrl}. Return a comprehensive summary of the responsibilities and requirements.` }]
+          parts: [{ text: `
+            You are a Job Market Researcher.
+            Target URL: ${jobUrl}
+            
+            Task: Retrieve the detailed Job Description (responsibilities, skills, requirements).
+            
+            Instructions:
+            1. Use Google Search to find the content of this job listing.
+            2. CRITICAL: If the URL leads to a login page (like LinkedIn, Glassdoor, Indeed) or blocked content, use Google Search to find the *same job listing* (Job Title + Company) on other public career sites or the company's own careers page.
+            3. Compile a comprehensive summary containing:
+               - Exact Job Title & Company Name
+               - Key Responsibilities
+               - Required Technical & Soft Skills
+               - Years of Experience & Qualifications
+            
+            If you cannot find the *exact* job after searching, generate a best-effort summary based on typical requirements for this specific Job Title at this specific Company, but note that it is an estimation.
+          ` }]
         },
         config: {
           tools: [{ googleSearch: {} }],
@@ -264,6 +281,13 @@ export const orchestrateAnalysis = async (
       jobAgent.run(jobUrl),
       resumeAgent.run(resumeFile)
     ]);
+
+    // Validation Log
+    if (jobContext.length < 150 || jobContext.toLowerCase().includes("cannot find")) {
+        logCallback({ id: 'warn-jd', message: 'Warning: Job Description found but may be incomplete.', type: 'error', timestamp: Date.now() });
+    } else {
+        logCallback({ id: 'success-jd', message: 'Job Description fetched successfully.', type: 'success', timestamp: Date.now() });
+    }
 
     // Store in Memory
     memory.jobDescription = jobContext;
